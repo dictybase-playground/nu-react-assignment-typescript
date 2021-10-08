@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 import './App.css';
 import data from './data/data.json'
 import Container from '@mui/material/Container';
-import { flexbox } from '@mui/system';
 import Header from './components/Header';
 import Search from './components/Search';
 import List from './components/List';
+
+export interface ItemData {
+  id: number,
+  name: String
+}
+
+export type ACTIONTYPE = 
+  | { type: "Add Item"; payload: ItemData}
+  | { type: "Delete Item"; payload: ItemData}
+
+export interface reducerContextProps {
+  state: ItemData[],
+  dispatch: Dispatch<ACTIONTYPE>
+}
+
+
+
+export const ReducerContext = React.createContext({} as reducerContextProps)
 
 /* Add Context like this
 https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a4971e80114a052
 */
 
-interface ItemData {
-  id: number,
-  name: String
-}
+
 
 // interface ItemListData {
 //   array: ItemData[]
@@ -26,9 +40,7 @@ interface ItemData {
 
 const initialState : ItemData[] = data;
 
-type ACTIONTYPE = 
-  | { type: "Add Item"; payload: ItemData}
-  | { type: "Delete Item"; payload: ItemData}
+
 
 const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
   let newList;
@@ -49,21 +61,19 @@ const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
 
 function App() {
 
-  
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const addItem = (entry: ItemData) => dispatch({type: "Add Item", payload: entry});
-  const removeItem = (entry: ItemData) => dispatch({type: "Delete Item", payload: entry});
-
   return (
-    <div className="App">
-      <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Header/>
-        <Search />
-        <List itemList={state}/>
-      Test
-      </Container>
-    </div>
+    <ReducerContext.Provider value={{state: initialState, dispatch}}>
+      <div className="App">
+        <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Header/>
+          <Search />
+          {/* <List/> */}
+        Test
+        </Container>
+      </div>
+    </ReducerContext.Provider>
   );
 }
 

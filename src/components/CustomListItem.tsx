@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import ListItemText from "@mui/material/ListItemText";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
+import { ReducerContext } from '../App';
+import ItemData from '../App';
 
-const CustomListItem = () => {
+const CustomListItem = ({itemProp}: typeof ItemData) => {
+
+  const { state, dispatch } = useContext(ReducerContext);
+
   return (
     <Box bgcolor="#C28D9F">
       <ListItem divider>
-        {/* <ListItemText primary={item.name} /> */}
+        <ListItemText primary={itemProp.name} />
         <ListItemSecondaryAction>
           <IconButton
             edge="end"
             aria-label="delete"
             onClick={() => {
-              // handleItemDelete(item.id);
+              dispatch("Delete Item", itemProp);
             }}
           >
             <DeleteIcon />

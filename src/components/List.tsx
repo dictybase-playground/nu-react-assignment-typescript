@@ -1,15 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import CustomListItem from "./CustomListItem";
 import Box from "@mui/material/Box";
+import { ReducerContext } from "../App";
 
-interface ItemData {
-    id: number,
-    name: String
-}
+const ListSection = () => {
 
-const ListSection: FC<ItemData[]> = ({itemList}) => {
+  const { state, dispatch } = useContext(ReducerContext);
 
   return (
     <React.Fragment>
@@ -21,15 +19,14 @@ const ListSection: FC<ItemData[]> = ({itemList}) => {
         bgcolor="#DECAA1"
       >
         <Typography variant="h3" gutterBottom>
-          My Items {itemList.length}
+          My Items {state.length}
         </Typography>
         <List>
-          {itemList.map((item) => {
+          {state.map((item) => {
             return (
               <React.Fragment key={item.id}>
                 <CustomListItem
-                //   item={item}
-                //   handleItemDelete={handleItemDelete}
+                  itemProp={item}
                 ></CustomListItem>
               </React.Fragment>
             );
