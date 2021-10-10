@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { ReducerContext } from '../App';
 import ItemData from '../App';
 
-const CustomListItem = ({itemProp}: typeof ItemData) => {
+const CustomListItem = (itemProp: typeof ItemData) => {
 
   const { state, dispatch } = useContext(ReducerContext);
 
@@ -21,7 +21,7 @@ const CustomListItem = ({itemProp}: typeof ItemData) => {
             edge="end"
             aria-label="delete"
             onClick={() => {
-              dispatch("Delete Item", itemProp);
+              dispatch({type:"Delete Item", payload:itemProp});
             }}
           >
             <DeleteIcon />
