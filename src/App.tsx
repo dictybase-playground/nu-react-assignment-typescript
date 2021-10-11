@@ -69,7 +69,7 @@ function App() {
         <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column' }}>
           <Header/>
           <Search />
-          {/* <List/> */}
+          <List/>
         Test
         </Container>
       </div>
