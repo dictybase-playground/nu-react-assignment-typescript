@@ -17,7 +17,7 @@ const Search = () => {
       if(searchText !== "") {
         const new_id = state.length + 1 + Math.floor(Math.random() * 9999);
         dispatch({type: "Add Item", payload: {id: new_id, name: searchText}});
-        
+        setText("");
       }
       return; 
     }
