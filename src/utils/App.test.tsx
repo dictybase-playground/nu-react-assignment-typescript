@@ -23,3 +23,21 @@ test('Search bar typing & Add Item Button Press', () => {
   userEvent.click(buttonComponent);
   expect(inputComponent).toHaveValue('');
 });
+
+test('Adding an item to the list', () => {
+  render(<App />);
+
+  const inputComponent = screen.getByRole('textbox');
+  const buttonComponent = screen.getByRole('button', {
+    name: 'Add Item'
+  });
+
+  userEvent.type(inputComponent, 'List Item');
+  expect(inputComponent).toHaveValue('List Item');
+
+  userEvent.click(buttonComponent);
+  expect(inputComponent).toHaveValue('');
+
+  const newItemText = screen.getByText('List Item');
+  expect(newItemText).toBeInTheDocument();
+});
