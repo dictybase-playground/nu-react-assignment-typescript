@@ -12,8 +12,8 @@ export interface ItemData {
 }
 
 export type ACTIONTYPE = 
-  | { type: "Add Item"; payload: ItemData}
-  | { type: "Delete Item"; payload: ItemData}
+  | { type: "Add Item", payload: ItemData}
+  | { type: "Delete Item", payload: ItemData}
 
 export interface reducerContextProps {
   state: ItemData[],
@@ -50,9 +50,11 @@ const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
         ...state,
         action.payload
       ]
+      console.debug("Add Item", newList);
       return newList;
     case "Delete Item":
       newList = state.filter((item) => item.id !== action.payload.id);
+      console.debug("Delete Item", newList);
       return newList;
     default:
       throw new Error();
@@ -62,15 +64,14 @@ const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
 function App() {
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
-
+  console.debug("App: ", state);
   return (
-    <ReducerContext.Provider value={{state: initialState, dispatch}}>
+    <ReducerContext.Provider value={{state, dispatch}}>
       <div className="App">
         <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column' }}>
           <Header/>
           <Search />
           <List/>
-        Test
         </Container>
       </div>
     </ReducerContext.Provider>
