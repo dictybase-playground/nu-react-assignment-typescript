@@ -20,27 +20,9 @@ export interface reducerContextProps {
   dispatch: Dispatch<ACTIONTYPE>
 }
 
-
-
 export const ReducerContext = React.createContext({} as reducerContextProps)
 
-/* Add Context like this
-https://gist.github.com/sw-yx/f18fe6dd4c43fddb3a4971e80114a052
-*/
-
-
-
-// interface ItemListData {
-//   array: ItemData[]
-// }
-
-// interface ItemListData {
-//   [index: number]: {id:number, name: String}
-// }
-
 const initialState : ItemData[] = data;
-
-
 
 const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
   let newList;
