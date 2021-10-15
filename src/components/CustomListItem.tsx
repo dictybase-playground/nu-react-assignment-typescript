@@ -9,7 +9,7 @@ import { ReducerContext } from '../App';
 import {ItemData} from '../App';
 
 const CustomListItem = ({itemProp}: {itemProp: ItemData}) => {
-  const { state, dispatch } = useContext(ReducerContext);
+  const { dispatch } = useContext(ReducerContext);
 
   return (
     <Box bgcolor="#C28D9F">

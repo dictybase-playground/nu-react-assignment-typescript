@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { useContext } from "react";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import CustomListItem from "./CustomListItem";
@@ -7,7 +7,7 @@ import { ItemData, ReducerContext } from "../App";
 
 const ListSection = () => {
 
-  const { state, dispatch } = useContext(ReducerContext);
+  const { state } = useContext(ReducerContext);
   console.debug("ListSection: ", state);
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import './App.css';
 import data from './data/data.json'
 import Container from '@mui/material/Container';
